@@ -17,4 +17,6 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    private String name;
+    private String surname;
 }
