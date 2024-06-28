@@ -17,4 +17,10 @@ public class BaseString {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @ManyToOne
+    private Character characterName;
+
+    @ManyToOne
+    private Character characterSurname;
 }

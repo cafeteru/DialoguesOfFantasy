@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @AllArgsConstructor
 @Builder
@@ -17,6 +19,10 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private String name;
-    private String surname;
+
+    @OneToMany(mappedBy = "characterName", fetch = FetchType.LAZY)
+    private Set<BaseString> names;
+
+    @OneToMany(mappedBy = "characterSurname", fetch = FetchType.LAZY)
+    private Set<BaseString> surnames;
 }
