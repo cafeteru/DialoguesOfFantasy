@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @AllArgsConstructor
 @Builder
@@ -17,4 +19,8 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    private String name;
+
+    @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY)
+    private Set<Project> projects;
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @AllArgsConstructor
 @Builder
@@ -20,4 +22,10 @@ public class Stage {
     private String name;
     private String description;
     private boolean active;
+
+    @OneToMany(mappedBy = "stage", fetch = FetchType.LAZY)
+    private Set<Translation> translations;
+
+    @ManyToMany(mappedBy = "stages", fetch = FetchType.LAZY)
+    private Set<Project> projects;
 }

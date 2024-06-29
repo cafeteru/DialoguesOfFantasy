@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 
 @AllArgsConstructor
 @Builder
@@ -18,9 +20,15 @@ public class BaseString {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    private Character characterName;
+    @OneToOne
+    private Avatar avatarName;
 
-    @ManyToOne
-    private Character characterSurname;
+    @OneToOne
+    private Avatar avatarSurname;
+
+    @OneToOne
+    private Avatar avatarDescription;
+
+    @OneToMany(mappedBy = "baseString", fetch = FetchType.LAZY)
+    private Set<Translation> translations;
 }

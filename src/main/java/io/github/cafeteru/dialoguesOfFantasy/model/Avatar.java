@@ -6,23 +6,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 
 @AllArgsConstructor
 @Builder
 @Data
 @Entity
 @NoArgsConstructor
-public class Character {
+public class Avatar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "characterName", fetch = FetchType.LAZY)
-    private Set<BaseString> names;
+    @OneToOne(mappedBy = "avatarName", fetch = FetchType.LAZY)
+    private BaseString name;
 
-    @OneToMany(mappedBy = "characterSurname", fetch = FetchType.LAZY)
-    private Set<BaseString> surnames;
+    @OneToOne(mappedBy = "avatarSurname", fetch = FetchType.LAZY)
+    private BaseString surname;
+
+    @OneToOne(mappedBy = "avatarDescription", fetch = FetchType.LAZY)
+    private BaseString description;
+
+    @ManyToOne
+    private Project project;
 }

@@ -18,4 +18,13 @@ public class Translation {
     @Column(name = "id")
     private Long id;
     private String content;
+
+    @ManyToOne
+    private BaseString baseString;
+
+    @ManyToOne
+    private Language language;
+
+    @ManyToOne
+    private Stage stage;
 }
