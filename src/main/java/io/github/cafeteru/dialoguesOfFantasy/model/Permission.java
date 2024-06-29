@@ -17,4 +17,10 @@ public class Permission {
     @Column(name = "id")
     private Long id;
     private boolean canWrite;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Project project;
 }

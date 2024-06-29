@@ -20,6 +20,7 @@ public class Company {
     @Column(name = "id")
     private Long id;
     private String name;
+    private boolean active;
 
     @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY)
     private Set<Project> projects;

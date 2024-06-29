@@ -20,6 +20,7 @@ public class Language {
     @Column(name = "id")
     private Long id;
     private String name;
+    private String isoCode;
     private boolean active;
 
     @OneToMany(mappedBy = "language", fetch = FetchType.LAZY)

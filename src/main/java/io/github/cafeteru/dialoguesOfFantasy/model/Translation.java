@@ -18,6 +18,7 @@ public class Translation {
     @Column(name = "id")
     private Long id;
     private String content;
+    private boolean active;
 
     @ManyToOne
     private BaseString baseString;

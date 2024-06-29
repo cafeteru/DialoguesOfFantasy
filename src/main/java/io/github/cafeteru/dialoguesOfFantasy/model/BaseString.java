@@ -20,14 +20,16 @@ public class BaseString {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
-    private Avatar avatarName;
+    private String identifier;
 
     @OneToOne
-    private Avatar avatarSurname;
+    private Character characterName;
 
     @OneToOne
-    private Avatar avatarDescription;
+    private Character characterSurname;
+
+    @OneToOne
+    private Character characterDescription;
 
     @OneToMany(mappedBy = "baseString", fetch = FetchType.LAZY)
     private Set<Translation> translations;

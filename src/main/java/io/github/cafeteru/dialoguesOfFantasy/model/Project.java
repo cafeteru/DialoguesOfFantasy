@@ -21,9 +21,11 @@ public class Project {
     private Long id;
 
     private String name;
+    private boolean active;
+    private boolean publicAccess;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    private Set<Avatar> characters;
+    private Set<Character> characters;
 
     @ManyToMany
     @JoinTable(
