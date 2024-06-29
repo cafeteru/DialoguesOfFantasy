@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "translations")
 public class Translation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

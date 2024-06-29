@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "base_strings")
 public class BaseString {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
