@@ -2,18 +2,15 @@ package io.github.cafeteru.dialoguesOfFantasy.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "companies")
 public class Company {
     @Id
@@ -23,6 +20,10 @@ public class Company {
     private String name;
     private boolean active;
 
-    @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY)
-    private Set<Project> projects;
+    @ManyToMany(mappedBy = "companies", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Project> projects = new HashSet<>();
+
+    public Company() {
+        this.active = true;
+    }
 }

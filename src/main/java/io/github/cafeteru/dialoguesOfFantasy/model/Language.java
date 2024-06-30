@@ -2,18 +2,15 @@ package io.github.cafeteru.dialoguesOfFantasy.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "languages")
 public class Language {
     @Id
@@ -24,6 +21,10 @@ public class Language {
     private String isoCode;
     private boolean active;
 
-    @OneToMany(mappedBy = "language", fetch = FetchType.LAZY)
-    private Set<Translation> translations;
+    @OneToMany(mappedBy = "language", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Translation> translations = new HashSet<>();
+
+    public Language() {
+        this.active = true;
+    }
 }

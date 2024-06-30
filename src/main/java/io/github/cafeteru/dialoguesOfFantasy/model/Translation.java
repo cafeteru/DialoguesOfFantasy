@@ -4,14 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "translations")
 public class Translation {
     @Id
@@ -21,12 +18,16 @@ public class Translation {
     private String content;
     private boolean active;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private BaseString baseString;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Language language;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Stage stage;
+
+    public Translation() {
+        this.active = true;
+    }
 }

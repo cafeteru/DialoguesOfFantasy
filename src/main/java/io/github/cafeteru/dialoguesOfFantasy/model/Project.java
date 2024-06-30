@@ -2,18 +2,17 @@ package io.github.cafeteru.dialoguesOfFantasy.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "projects")
 public class Project {
     @Id
@@ -25,22 +24,26 @@ public class Project {
     private boolean active;
     private boolean publicAccess;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    private Set<Character> characters;
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Character> characters = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "company_project",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "company_id")
     )
-    private Set<Company> companies;
+    private Set<Company> companies = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "stage_project",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "stage_id")
     )
-    private Set<Stage> stages;
+    private Set<Stage> stages = new HashSet<>();
+
+    public Project() {
+        this.active = true;
+    }
 }

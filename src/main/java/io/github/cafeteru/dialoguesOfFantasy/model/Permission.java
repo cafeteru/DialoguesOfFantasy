@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
 @NoArgsConstructor
@@ -19,9 +18,9 @@ public class Permission {
     private Long id;
     private boolean canWrite;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Project project;
 }
