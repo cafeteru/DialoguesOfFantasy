@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "stages")
 public class Stage {
     @Id
@@ -24,9 +22,13 @@ public class Stage {
     private String description;
     private boolean active;
 
-    @OneToMany(mappedBy = "stage", fetch = FetchType.LAZY)
-    private Set<Translation> translations;
+    @OneToMany(mappedBy = "stage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Translation> translations = new HashSet<>();
 
-    @ManyToMany(mappedBy = "stages", fetch = FetchType.LAZY)
-    private Set<Project> projects;
+    @ManyToMany(mappedBy = "stages", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Project> projects = new HashSet<>();
+
+    public Stage() {
+        this.active = true;
+    }
 }

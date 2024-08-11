@@ -6,11 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.*;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
 @NoArgsConstructor
@@ -23,15 +22,33 @@ public class BaseString {
 
     private String identifier;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Character characterName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Character characterSurname;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Character characterDescription;
 
-    @OneToMany(mappedBy = "baseString", fetch = FetchType.LAZY)
-    private Set<Translation> translations;
+    @OneToMany(mappedBy = "baseString", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Translation> translations = new HashSet<>();
+
+    public void addTranslation(Translation... translations) {
+        this.translations.addAll(List.of(translations));
+        Arrays.stream(translations).forEach(translation -> translation.setBaseString(this));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseString that = (BaseString) o;
+        return Objects.equals(id, that.id) && Objects.equals(identifier, that.identifier);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, identifier);
+    }
 }

@@ -8,10 +8,8 @@ import lombok.NoArgsConstructor;
 
 
 @AllArgsConstructor
-@Builder
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -23,4 +21,8 @@ public class User {
     private String email;
     private boolean admin;
     private boolean active;
+
+    public User() {
+        this.active = true;
+    }
 }
