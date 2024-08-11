@@ -1,4 +1,4 @@
-package io.github.cafeteru.dialoguesOfFantasy;
+package io.github.cafeteru.dialoguesOfFantasy.config;
 
 import io.github.cafeteru.dialoguesOfFantasy.model.Character;
 import io.github.cafeteru.dialoguesOfFantasy.model.*;
